@@ -18,16 +18,19 @@ public class MyLinkedList {
         // If the list is empty, the new node becomes the head
         if (head == null) {
             head = newNode;
-        } else {
-            // Traverse to the last node
-            Node n = head;
-            while (n.next != null) {
-                n = n.next;  // Move to the next node
-            }
-            // Set the next of the last node to the new node
-            n.next = newNode;
             size++;
+            System.out.println("Element Added at End: "+data);
+            return;
         }
+        // Traverse to the last node
+        Node n = head;
+        while (n.next != null) {
+            n = n.next;  // Move to the next node
+        }
+        // Set the next of the last node to the new node
+        n.next = newNode;
+        size++;
+        
         System.out.println("Element Added at End: "+data);
     }
     
@@ -41,6 +44,7 @@ public class MyLinkedList {
         if (head == null) {
             newNode.next = null;  // This step is actually optional since it's the default value
             head = newNode;
+            size++;
             System.out.println("Element Added at Beginning: "+data);
             return;
         }
@@ -55,8 +59,16 @@ public class MyLinkedList {
     
     // Adding Element at Specific Position
     public void addAtPosition(int data, int position) throws Exception{
-        if(position<1 || position > size){
+        if(position<1 || position > size+1){
             throw new Exception("Position Invalid");
+        }
+        if(position==1){
+            addAtBeginning(data);
+            return;
+        }
+        else if(position==size+1){
+            addAtEnd(data);
+            return;
         }
         // Create a new node and assign data to it
         Node newNode = new Node();
@@ -74,13 +86,16 @@ public class MyLinkedList {
 
     // Display the Linked list
     public void display(){
+        if(head==null){
+            System.out.println("LinkedList is Empty!");
+            return;
+        }
         System.out.println("Linked List : ");
         Node n = head;
-        while(n.next!=null){
+        while(n!=null){
             System.out.print(n.data+" ");
             n=n.next;
         }
-        System.out.print(n.data);
         System.out.println();
     }
 }
