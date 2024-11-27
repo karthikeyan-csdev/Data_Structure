@@ -1,44 +1,80 @@
-public class MyLinkedList<A> {
+public class MyLinkedList {
 
     private Node head;
-    // definition of linked list node
+    private int size=0;
+    // Definition of Singly linked list node
     class Node{
-        A data;
+        int data;
         Node next;
     }
 
-    // element inserted at last
-    public void add(A data){
+    // Adding Element at End
+    public void addAtEnd(int data) {
+        // Create a new node and assign data to it
         Node newNode = new Node();
         newNode.data = data;
-        newNode.next = null;
-        if(head==null){
+        newNode.next = null;  // The new node will be the last, so its next is null
+    
+        // If the list is empty, the new node becomes the head
+        if (head == null) {
             head = newNode;
-        }
-        else{
+        } else {
+            // Traverse to the last node
             Node n = head;
-            while(n.next!=null){
-                n=n.next;
+            while (n.next != null) {
+                n = n.next;  // Move to the next node
             }
+            // Set the next of the last node to the new node
             n.next = newNode;
+            size++;
         }
+        System.out.println("Element Added at End: "+data);
     }
-
-
-
-    public void addAtIndex(A data,int index){
+    
+    // Adding Element at Beginning
+    public void addAtBeginning(int data) {
+        // Create a new node and assign data to it
         Node newNode = new Node();
         newNode.data = data;
-        newNode.next = null;
-        if(head==null){
-            System.out.println("Linked List is Empty");
+        
+        // If the list is empty, the new node becomes the head
+        if (head == null) {
+            newNode.next = null;  // This step is actually optional since it's the default value
+            head = newNode;
+            System.out.println("Element Added at Beginning: "+data);
+            return;
         }
-        else{
-            
+        
+        // If the list is not empty, insert the new node at the beginning
+        newNode.next = head;  // Point the new node to the current head
+        head = newNode;       // Update the head to be the new node
+        size++;
+
+        System.out.println("Element Added at Beginning: "+data);
+    }
+    
+    // Adding Element at Specific Position
+    public void addAtPosition(int data, int position) throws Exception{
+        if(position<1 || position > size){
+            throw new Exception("Position Invalid");
         }
+        // Create a new node and assign data to it
+        Node newNode = new Node();
+        newNode.data = data;
+
+        Node n = head;
+        for(int i=1;i<position-1;i++){
+            n=n.next;
+        }
+        newNode.next = n.next;
+        n.next = newNode;
+        size++;
+        System.out.println("Element Added: "+data+" at Position: "+position);
     }
 
+    // Display the Linked list
     public void display(){
+        System.out.println("Linked List : ");
         Node n = head;
         while(n.next!=null){
             System.out.print(n.data+" ");
