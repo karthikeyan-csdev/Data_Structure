@@ -8,6 +8,11 @@ public class MyLinkedList {
         Node next;
     }
 
+    MyLinkedList(){
+        this.head = null;
+        this.size = 0;
+    }
+
     // Adding Element at End
     public void addAtEnd(int data) {
         // Create a new node and assign data to it
@@ -30,7 +35,6 @@ public class MyLinkedList {
         // Set the next of the last node to the new node
         n.next = newNode;
         size++;
-        
         System.out.println("Element Added at End: "+data);
     }
     
@@ -83,6 +87,83 @@ public class MyLinkedList {
         size++;
         System.out.println("Element Added: "+data+" at Position: "+position);
     }
+
+    // Searching for an Element, returning position (Linear Searching)
+    public int search(int data){
+        if(head==null)
+            return -1;
+    
+        Node n = head;
+        for(int i=0;i<size;i++) {
+            if(n.data == data){
+                return i+1;
+            }
+            n=n.next;
+        }
+        return -1;
+    }
+
+    // Deleting first Node
+    public void removeFirst(){
+        if(head==null){
+            System.out.println("Linked List is Empty!");
+            return;
+        }
+        // if(head.next==null){
+        //     head=null;
+        //     System.out.println("First element deleted");
+        //     return;
+        // }
+        head = head.next;
+        size--;
+        System.out.println("First element deleted");
+    }
+
+    // Deleting Node at Specific Position
+    public void removeAtPosition(int position) throws Exception{
+        if(head==null){
+            System.out.println("Linked List is Empty!");
+            return;
+        }
+        if(position<1 || position>size){
+            throw new Exception("Position Invalid.");
+        }
+        Node n=head;
+        if(position==1){
+            removeFirst();
+            return;
+        }
+        if(position==size){
+            removeLast();
+            return;
+        }
+        for(int i=1;i<position-1;i++){
+            n=n.next;
+        }
+        n.next = n.next.next;
+        size--;
+        System.out.println("Element Deleted at Position: "+position);
+    }
+
+    // Deleting Last Node
+    public void removeLast() {
+        if (head == null) {
+            System.out.println("Linked List is Empty!");
+            return;
+        }
+        if (head.next == null) { // If there's only one element
+            head = null;
+        } else {
+            Node n = head;
+            while (n.next.next != null) { // Traverse to the second-to-last node
+                n = n.next;
+            }
+            n.next = null; // Remove the last node
+        }
+        size--;
+        System.out.println("Last element deleted");
+    }
+    
 
     // Display the Linked list
     public void display(){

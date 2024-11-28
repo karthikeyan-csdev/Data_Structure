@@ -8,5 +8,9 @@ public class App {
         ll.display();
         ll.addAtPosition(0, 2);
         ll.display();
+        ll.removeAtPosition(4);
+        ll.display();
+//        ll.removeFirst();
+//      ll.display();
     }
 }
