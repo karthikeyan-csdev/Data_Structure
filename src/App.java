@@ -5,12 +5,9 @@ public class App {
         ll.addAtBeginning(3);
         ll.addAtEnd(4);
         ll.addAtBeginning(2);
-        ll.display();
         ll.addAtPosition(0, 2);
         ll.display();
-        ll.removeAtPosition(4);
+        ll.reverseList();
         ll.display();
-//        ll.removeFirst();
-//      ll.display();
     }
 }

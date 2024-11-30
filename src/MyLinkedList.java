@@ -88,17 +88,18 @@ public class MyLinkedList {
         System.out.println("Element Added: "+data+" at Position: "+position);
     }
 
-    // Searching for an Element, returning position (Linear Searching)
+    // Searching for an Element (Linear Searching)
     public int search(int data){
         if(head==null)
             return -1;
     
+        int position =1;
         Node n = head;
-        for(int i=0;i<size;i++) {
-            if(n.data == data){
-                return i+1;
-            }
+        while(n!=null){
+            if(n.data==data)
+                return position;
             n=n.next;
+            position++;
         }
         return -1;
     }
@@ -109,40 +110,32 @@ public class MyLinkedList {
             System.out.println("Linked List is Empty!");
             return;
         }
-        // if(head.next==null){
-        //     head=null;
-        //     System.out.println("First element deleted");
-        //     return;
-        // }
         head = head.next;
         size--;
         System.out.println("First element deleted");
     }
 
-    // Deleting Node at Specific Position
-    public void removeAtPosition(int position) throws Exception{
+    // Deleting element
+    public void removeElement(int data) throws Exception{
         if(head==null){
             System.out.println("Linked List is Empty!");
             return;
         }
-        if(position<1 || position>size){
-            throw new Exception("Position Invalid.");
-        }
-        Node n=head;
-        if(position==1){
+        if(head.data==data){
             removeFirst();
             return;
         }
-        if(position==size){
-            removeLast();
-            return;
-        }
-        for(int i=1;i<position-1;i++){
+        Node n=head;
+        while (n.next!=null) {
+            if(n.next.data==data){
+                n.next=n.next.next;
+                size--;
+                System.out.println("Element Deleted");
+                return;
+            }
             n=n.next;
         }
-        n.next = n.next.next;
-        size--;
-        System.out.println("Element Deleted at Position: "+position);
+        System.out.println("Element not Found!");
     }
 
     // Deleting Last Node
@@ -163,7 +156,25 @@ public class MyLinkedList {
         size--;
         System.out.println("Last element deleted");
     }
-    
+
+    //Reversing the List
+    public void reverseList(){
+        if (head == null) {
+            System.out.println("Linked List is Empty!");
+            return;
+        }
+        Node previous = null;
+        Node current = head;
+        Node next = null;
+        while (current!=null) {
+            next=current.next;
+            current.next = previous;
+            previous = current;
+            current=next;
+        }
+        head=previous;
+        System.out.println("Linked List Reversed!");
+    }
 
     // Display the Linked list
     public void display(){
