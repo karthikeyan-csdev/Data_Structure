@@ -1,13 +1,15 @@
 public class App {
     public static void main(String[] args) throws Exception {
 
-        MyLinkedList ll = new MyLinkedList();
-        ll.addAtBeginning(3);
-        ll.addAtEnd(4);
-        ll.addAtBeginning(2);
-        ll.addAtPosition(0, 2);
-        ll.display();
-        ll.reverseList();
-        ll.display();
+        SinglyLinkedList list = new SinglyLinkedList();
+
+        list.addAtBeginning(1);
+        list.addAtBeginning(2);
+        list.addAtBeginning(3);
+        list.addAtEnd(4);
+        list.display();
+        list.reverseList();
+        list.detectLoop();
+        System.out.println(list.display());
     }
 }
